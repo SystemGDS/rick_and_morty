@@ -1,0 +1,47 @@
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    border: 1px solid grey;
+    background-color: lightcyan;
+    border-radius: 10px;
+    width: 20%;
+    padding: 5px;
+    box-shadow: 0 0 10px black;
+    
+}
+
+.image {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.buttonContainer {
+    /* border: 1px solid grey; */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonContainer button{
+    background-color: rgb(230, 38, 24);
+    color: white;
+    border:  1px solid grey;
+    border-radius: 3px;
+}
+
+.dataContainer {
+    text-align: center;
+    padding: 10px;
+}
+
+.dataContainer h2 {
+    margin: 2px;
+    font-size: 25px;
+    color: darkolivegreen;
+    font-style: oblique;
+}
+
+.dataContainer h4 {
+    margin: 2px;
+    font-size: 16px;
+    color: rgb(32, 46, 7);
+}
