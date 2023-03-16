@@ -14,7 +14,7 @@ const Status = ({ updateStatus, updatePageNumber }) => {
           aria-expanded="true"
           aria-controls="collapseOne"
         >
-          Status
+          Estados
         </button>
       </h2>
       <div

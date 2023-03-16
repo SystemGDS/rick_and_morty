@@ -7,6 +7,7 @@ import Card from "./components/Card/Card";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
 import Navbar from "./components/NavBar/NavBar";
+// import Form from "./components/Form/Form";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Episodes from "./Pages/Episodes";
@@ -14,12 +15,60 @@ import Location from "./Pages/Location";
 import CardDetails from "./components/Card/CardDetails";
 
 function App() {
+//   // const [characters, setCharacters] = useState([]);
+//   const [access, setAccess] = useState(false);
+  
+//   const username = 'ejemplo@gmail.com';
+//   const password = '1password';
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     !access && navigate('/');
+//  // eslint-disable-next-line react-hooks/exhaustive-deps
+//  }, [access]);
+
+//  function login(userData) {
+//   if (userData.password === password && userData.username === username) {
+//      setAccess(true);
+//      navigate('/home');
+//   }
+// }
+// //   const example = {
+// //     name: 'Morty Smith',
+// //     species: 'Human',
+// //     gender: 'Male',
+// //     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+// //  };
+//   // const onSearch = (data)=>{
+//   //   setCharacters([...characters, example]);     
+//   // } 
+//   // function onSearch(character) {
+//   //  fetch(`https://rickandmortyapi.com/api/character/${character}`)
+//   //     .then((response) => response.json())
+//   //     .then((data) => {
+//   //        if (data.name) {
+//   //           setCharacters((oldChars) => [...oldChars, data]);
+//   //        } else {
+//   //           window.alert('No hay personajes con ese ID');
+//   //        }
+//   //     });
+//   // }
+
+//   // const onClose = (id) => {
+//   //   setCharacters(characters.filter((char) => char.id!== id));
+//   // }
+
+//   const location = useLocation();
+//   console.log(location);
+
+
   return (
     <Router>
       <div className="App">
         <Navbar />
       </div>
       <Routes>
+        {/* <Route exact path= "/" element={<Form login={login}/>} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<CardDetails />} />
 
@@ -52,7 +101,7 @@ const Home = () => {
   }, [api]);
   return (
     <div className="App">
-      <h1 className="text-center mb-3">Characters</h1>
+      <h1 className="text-center mb-3">Personajes</h1>
       <SearchBar setSearch={setSearch} updatePageNumber={updatePageNumber} />
       <div className="container">
         <div className="row">

@@ -14,7 +14,7 @@ const SearchBar = ({ setSearch, updatePageNumber }) => {
           updatePageNumber(1);
           setSearch(e.target.value);
         }}
-        placeholder="Search for characters"
+        placeholder="Buscar Personajes"
         className={styles.input}
         type="text"
       />
@@ -22,7 +22,7 @@ const SearchBar = ({ setSearch, updatePageNumber }) => {
         onClick={searchBtn}
         className={`${styles.btn} btn btn-primary fs-5`}
       >
-        Search
+        Buscar
       </button>
     </form>
   );

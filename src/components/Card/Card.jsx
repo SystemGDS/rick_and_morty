@@ -27,6 +27,7 @@ const Card = ({ page, results }) => {
               <div className="">
                 <div className="fs-6 fw-normal">Last Location</div>
                 <div className="fs-5">{location.name}</div>
+                <div className="fs-5">{display}</div>
               </div>
             </div>
           </div>
@@ -62,7 +63,7 @@ const Card = ({ page, results }) => {
       );
     });
   } else {
-    display = "No Characters Found :/";
+    display = "No se Encontraron Personajes :/";
   }
 
   return <>{display}</>;

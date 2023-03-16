@@ -33,19 +33,19 @@ const CardDetails = () => {
         })()}
         <div className="content">
           <div className="">
-            <span className="fw-bold">Gender : </span>
+            <span className="fw-bold">Genero : </span>
             {gender}
           </div>
           <div className="">
-            <span className="fw-bold">Location: </span>
+            <span className="fw-bold">Localizacion: </span>
             {location?.name}
           </div>
           <div className="">
-            <span className="fw-bold">Origin: </span>
+            <span className="fw-bold">Origen: </span>
             {origin?.name}
           </div>
           <div className="">
-            <span className="fw-bold">Species: </span>
+            <span className="fw-bold">Especie: </span>
             {species}
           </div>
         </div>

@@ -26,6 +26,7 @@ const Pagination = ({ pageNumber, info, updatePageNumber }) => {
             .next,
             .prev {
               display: none;
+              decoration: none;
             }
           }
           @media (max-width: 768px) {
@@ -40,7 +41,7 @@ const Pagination = ({ pageNumber, info, updatePageNumber }) => {
         nextLabel="Next"
         forcePage={pageNumber === 1 ? 0 : pageNumber - 1}
         previousLabel="Prev"
-        previousClassName="btn btn-primary fs-5 prev"
+        previousClassName="btn btn-primary fs-5 prev "
         nextClassName="btn btn-primary fs-5 next"
         activeClassName="active"
         marginPagesDisplayed={width < 576 ? 1 : 2}

@@ -1,4 +1,4 @@
-import styles from './Form.module.css'
+import styles from './Form.module.scss'
 import { useState } from 'react'
 import validation from './validation.js'
 import image from '../../img/Rick_and_Morty_logo.png'
