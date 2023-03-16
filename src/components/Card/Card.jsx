@@ -1,48 +1,71 @@
 
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./Card.module.scss";
+// import CardDetail from "./CardDetails";
 
-export default function Card(props) {  
-   // const card = ({id, name,species,image}){id, name,species,gender,image}
+const Card = ({ page, results }) => {
+  let display;
 
-   return (
+  if (results) {
+    display = results.map((x) => {
+      let { id, image, name, status, location } = x;
 
-      <div className="card-group m-2">
-         <div className="card">
-         <button  
-         onClick={props.onClose}
-         className="btn btn-primary btn-outline-danger font-weight-bold text-red"
-         >X</button>
-         <Link to={`/detail/${props.id}`}>
-            <img src={props.image} className="card-img-top redoum" alt="" />
-         </Link>
-            <div className="card-body">
-               <h5 className="text-danger font-weight-bold">{props.name}</h5>
-               <p className="text-primary font-weight-bold">{props.species}</p>
-               <p className="text-primary font-weight-bold">{props.status}</p>
-               <p className="text-info font-weight-bold">{props.gender}</p>
-              
+      return (
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`${page}${id}`}
+          key={id}
+          className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
+        >
+          <div
+            className={`${styles.card} d-flex flex-column justify-content-center`}
+          >
+            <img className={`${styles.img} img-fluid`} src={image} alt="" />
+            <div className={`${styles.content}`}>
+              <div className="fs-5 fw-bold mb-4">{name}</div>
+              <div className="">
+                <div className="fs-6 fw-normal">Last Location</div>
+                <div className="fs-5">{location.name}</div>
+              </div>
             </div>
-         </div>
-      </div>
-   );
-}
+          </div>
 
-/* <div className={styles.container}>
-   <div className={styles.buttonContainer}>
-      <button  
-         onClick={props.onClose}>X</button>
-   </div>
-      <div className={styles.dataContainer}>
-         <h2>{props.name}</h2>
-         <h4>{props.species}</h4>
-         <h4>{props.gender}</h4>
-      </div>
-   <Link to={`/detail/${props.id}`}>
-      <img  className ={styles.image} src={props.image} alt="Nombre Imagen" />
-   </Link>
-</div> */
+          {(() => {
+            if (status === "Dead") {
+              return (
+                <div
+                  className={`${styles.badge} position-absolute badge bg-danger`}
+                >
+                  {status}
+                </div>
+              );
+            } else if (status === "Alive") {
+              return (
+                <div
+                  className={`${styles.badge} position-absolute badge bg-success`}
+                >
+                  {status}
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  className={`${styles.badge} position-absolute badge bg-secondary`}
+                >
+                  {status}
+                </div>
+              );
+            }
+          })()}
+        </Link>
+      );
+    });
+  } else {
+    display = "No Characters Found :/";
+  }
 
-// name: Nombre
-// species: Especie
-// gender: Genero
-// image: Imagen
+  return <>{display}</>;
+};
+
+export default Card;

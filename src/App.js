@@ -1,86 +1,83 @@
-import React,  {useState, useEffect} from 'react'
-import './App.css'
-import Cards from './components/Cards/Cards.jsx'
-import NavBar from './components/NavBar/NavBar'
-import About from './components/About/About.jsx'
-import Detail from './components/Detail/Detail.jsx'
-import Form from './components/Form/Form'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap";
+import React, { useState, useEffect } from "react";
 
-//Redux
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import SearchBar from "./components/SearchBar/SearchBar";
+import Card from "./components/Card/Card";
+import Pagination from "./components/Pagination/Pagination";
+import Filter from "./components/Filter/Filter";
+import Navbar from "./components/NavBar/NavBar";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Episodes from "./Pages/Episodes";
+import Location from "./Pages/Location";
+import CardDetails from "./components/Card/CardDetails";
 
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<CardDetails />} />
 
-function App () {
+        <Route path="/episodes" element={<Episodes />} />
+        <Route path="/episodes/:id" element={<CardDetails />} />
 
-  const [characters, setCharacters] = useState([]);
-  const [access, setAccess] = useState(false);
-  
-  const username = 'ejemplo@gmail.com';
-  const password = '1passwor';
-  const navigate = useNavigate();
+        <Route path="/location" element={<Location />} />
+        <Route path="/location/:id" element={<CardDetails />} />
+      </Routes>
+    </Router>
+  );
+}
+
+const Home = () => {
+  let [pageNumber, updatePageNumber] = useState(1);
+  let [status, updateStatus] = useState("");
+  let [gender, updateGender] = useState("");
+  let [species, updateSpecies] = useState("");
+  let [fetchedData, updateFetchedData] = useState([]);
+  let [search, setSearch] = useState("");
+  let { info, results } = fetchedData;
+
+  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
 
   useEffect(() => {
-    !access && navigate('/');
- // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [access]);
-
- function login(userData) {
-  if (userData.password === password && userData.username === username) {
-     setAccess(true);
-     navigate('/home');
-  }
-}
-//   const example = {
-//     name: 'Morty Smith',
-//     species: 'Human',
-//     gender: 'Male',
-//     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
-//  };
-  // const onSearch = (data)=>{
-  //   setCharacters([...characters, example]);     
-  // } 
-  function onSearch(character) {
-   fetch(`https://rickandmortyapi.com/api/character/${character}`)
-      .then((response) => response.json())
-      .then((data) => {
-         if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
-         } else {
-            window.alert('No hay personajes con ese ID');
-         }
-      });
-  }
-
-  const onClose = (id) => {
-    setCharacters(characters.filter((char) => char.id!== id));
-  }
-
-  const location = useLocation();
-console.log(location);
+    (async function () {
+      let data = await fetch(api).then((res) => res.json());
+      updateFetchedData(data);
+    })();
+  }, [api]);
   return (
-    // <div>     
-    //   <img src="../img/Rick_and_Morty_logo.png" className='img-container' alt='logo' />
-    <div className='App' styles={{pading: '25px'}} > 
-    {location.pathname !== "/" && <NavBar onSearch = {onSearch}/>}
-      
-      <hr />
-    <Routes>
-          
-          <Route exact path= "/" element={<Form login={login}/>} />        
-          <Route path= "/about" element={<About />} />  
-          <Route path= "/home" element={ <Cards
-              characters={characters}
-              onClose = {onClose}
-            />} />  
-          <Route path= "/detail/:detailId" element={<Detail />} />  
-      
-    </Routes>         
-        
-     
+    <div className="App">
+      <h1 className="text-center mb-3">Characters</h1>
+      <SearchBar setSearch={setSearch} updatePageNumber={updatePageNumber} />
+      <div className="container">
+        <div className="row">
+          <Filter
+            pageNumber={pageNumber}
+            status={status}
+            updateStatus={updateStatus}
+            updateGender={updateGender}
+            updateSpecies={updateSpecies}
+            updatePageNumber={updatePageNumber}
+          />
+          <div className="col-lg-8 col-12">
+            <div className="row">
+              <Card page="/" results={results} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        updatePageNumber={updatePageNumber}
+      />
     </div>
-  // </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

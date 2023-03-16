@@ -1,31 +1,32 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from "react";
+import styles from "./SearchBar.module.scss";
 
+const SearchBar = ({ setSearch, updatePageNumber }) => {
+  let searchBtn = (e) => {
+    e.preventDefault();
+  };
+  return (
+    <form
+      className={`${styles.search} d-flex flex-sm-row flex-column align-items-center justify-content-center gap-4 mb-5`}
+    >
+      <input
+        onChange={(e) => {
+          updatePageNumber(1);
+          setSearch(e.target.value);
+        }}
+        placeholder="Search for characters"
+        className={styles.input}
+        type="text"
+      />
+      <button
+        onClick={searchBtn}
+        className={`${styles.btn} btn btn-primary fs-5`}
+      >
+        Search
+      </button>
+    </form>
+  );
+};
 
-export default function SearchBar(props) {
-   //props = {onSearch= function}
-  const [characters, setCharacter] = useState('')
-  const handleChange = (e) => {
-      const {value} = e.target;
-      setCharacter(value);
-   }
+export default SearchBar;
 
-   const cargando = useSelector(state => state.characters.loading);
-
-
-   return (
-      
-      <div >
-         <input 
-            type="search"
-            name="search"
-            placeholder='Ingresar N° entre 1 y 826'
-            id="search"  
-            onChange = {handleChange}
-            className="form-control"
-         />
-         <button className='btn btn-danger nuevo-post d-block d-md-inline-block' onClick={() => props.onSearch(characters)}>Agregar</button>
-         {cargando ? <p>Cargando...</p>: null}
-      </div>
-   );
-}
